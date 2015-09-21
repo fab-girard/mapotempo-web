@@ -34,7 +34,7 @@ class HereTest < ActionController::TestCase
 
   test 'should compute rectangular matrix' do
     begin
-      uri_template = Addressable::Template.new('https://route.nlp.nokia.com/routing/6.2/calculatematrix.json?app_code=5GEGWZnjPAA-ZIwc7DF3Mw&app_id=yihiGwg1ibLi0q6BfBOa&destination0=45.75057,4.83945&destination1=45.76366,4.85141&destination2=45.75593,4.85041&mode=fastest%3Btruck%3Btraffic:disabled&start0=47.3174,5.0336')
+      uri_template = Addressable::Template.new('https://route.nlp.nokia.com/routing/6.2/calculatematrix.json?app_code={app_code}&app_id={app_id}&destination0=45.75057,4.83945&destination1=45.76366,4.85141&destination2=45.75593,4.85041&mode=fastest%3Btruck%3Btraffic:disabled&start0=47.3174,5.0336')
       stub = stub_request(:get, uri_template).to_return(File.new(File.expand_path('../', __FILE__) + '/route.nlp.nokia.com/calculate_rectangular_matrix.json').read)
 
       row = [[47.3174, 5.0336]]
