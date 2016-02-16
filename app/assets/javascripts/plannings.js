@@ -330,6 +330,71 @@ var plannings_edit = function(params) {
     }
   }
 
+  var initSelectColor = function() {
+    var templateSelectionColor = function(state) {
+      if(state.id){
+        return $("<span class='color_small' style='background:" + state.id + "'></span>");
+      } else {
+      }
+    }
+
+    var templateResultColor = function(state) {
+      if(state.id){
+        return $("<span class='color_small' style='background:" + state.id + "'></span>");
+      } else {
+        return $("<span class='color_small' data-color=''></span>");
+      }
+    }
+
+    var formatNoMatches = I18n.t('web.select2.empty_result');
+    fake_select2($(".color_select"), function(select) {
+      select.select2({
+        minimumResultsForSearch: -1,
+        templateSelection: templateSelectionColor,
+        templateResult: templateResultColor,
+        formatNoMatches: function() {
+          return formatNoMatches;
+        }
+      }).select2("open");
+      select.next('.select2-container--bootstrap').addClass('input-sm');
+    });
+  }
+
+  var initSelectVehicle = function() {
+    var templateSelectionVehicles = function(state) {
+      if(state.id) {
+        var color = $('.color_select', $(state.element).parent().parent()).val();
+        if(color) {
+          return $("<span/>").text(vehicles_usages_map[state.id].name);
+        } else {
+          return $("<span><span class='color_small' style='background:" + vehicles_usages_map[state.id].color + "'></span>&nbsp;</span>").append($("<span/>").text(vehicles_usages_map[state.id].name));
+        }
+      }
+    }
+
+    var templateResultVehicles = function(state) {
+      if(state.id){
+        return $("<span><span class='color_small' style='background:" + vehicles_usages_map[state.id].color + "'></span>&nbsp;</span>").append($("<span/>").text(vehicles_usages_map[state.id].name));
+      } else {
+        console.log(state);
+      }
+    }
+
+    var formatNoMatches = I18n.t('web.select2.empty_result');
+    fake_select2($(".vehicle_select"), function(select) {
+      select.select2({
+        minimumResultsForSearch: -1,
+        data: vehicles_array,
+        templateSelection: templateSelectionVehicles,
+        templateResult: templateResultVehicles,
+        formatNoMatches: function() {
+          return formatNoMatches;
+        }
+      }).select2("open");
+      select.next('.select2-container--bootstrap').addClass('input-sm');
+    });
+  }
+
   var displayPlanning = function(data, options) {
     if ($("#dialog-optimizer").size() == 0) {
       return; // Avoid render and loop with turbolink when page is over
@@ -382,66 +447,8 @@ var plannings_edit = function(params) {
     if (typeof options !== 'object' || !options.partial) {
       $("#planning").html(SMT['plannings/edit'](data));
 
-      var templateSelectionColor = function(state) {
-        if(state.id){
-          return $("<span class='color_small' style='background:" + state.id + "'></span>");
-        } else {
-        }
-      }
-
-      var templateResultColor = function(state) {
-        if(state.id){
-          return $("<span class='color_small' style='background:" + state.id + "'></span>");
-        } else {
-          return $("<span class='color_small' data-color=''></span>");
-        }
-      }
-
-      var formatNoMatches = I18n.t('web.select2.empty_result');
-      fake_select2($(".color_select"), function(select) {
-        select.select2({
-          minimumResultsForSearch: -1,
-          templateSelection: templateSelectionColor,
-          templateResult: templateResultColor,
-          formatNoMatches: function() {
-            return formatNoMatches;
-          }
-        }).select2("open");
-        select.next('.select2-container--bootstrap').addClass('input-sm');
-      });
-
-      var templateSelectionVehicles = function(state) {
-        if(state.id) {
-          var color = $('.color_select', $(state.element).parent().parent()).val();
-          if(color) {
-            return $("<span/>").text(vehicles_usages_map[state.id].name);
-          } else {
-            return $("<span><span class='color_small' style='background:" + vehicles_usages_map[state.id].color + "'></span>&nbsp;</span>").append($("<span/>").text(vehicles_usages_map[state.id].name));
-          }
-        }
-      }
-
-      var templateResultVehicles = function(state) {
-        if(state.id){
-          return $("<span><span class='color_small' style='background:" + vehicles_usages_map[state.id].color + "'></span>&nbsp;</span>").append($("<span/>").text(vehicles_usages_map[state.id].name));
-        } else {
-          console.log(state);
-        }
-      }
-
-      var formatNoMatches = I18n.t('web.select2.empty_result');
-      fake_select2($(".vehicle_select"), function(select) {
-        select.select2({
-          minimumResultsForSearch: -1,
-          data: vehicles_array,
-          templateSelection: templateSelectionVehicles,
-          templateResult: templateResultVehicles,
-          formatNoMatches: function() {
-            return formatNoMatches;
-          }
-        }).select2("open");
-        select.next('.select2-container--bootstrap').addClass('input-sm');
-      });
+      initSelectColor();
+      initSelectVehicle();
 
       // KMZ: Export Route via E-Mail
       $('.kmz_email a').click(function(e) {
@@ -543,8 +550,9 @@ var plannings_edit = function(params) {
             contentType: 'application/json',
             url: '/plannings/' + planning_id + '/switch.json',
             beforeSend: beforeSendWaiting,
-            // TODO: update only 2 routes
-            success: displayPlanning,
+            success: function(data) {
+              displayPlanning(data, {partial: 'routes'});
+            },
             complete: completeAjaxMap,
             error: ajaxError
           });
@@ -704,7 +712,18 @@ var plannings_edit = function(params) {
         });
       });
     }
-    else {
+    else if (typeof options === 'object' && options.partial == 'routes') {
+      $.each(data.routes, function(i, route) {
+        route.i18n = mustache_i18n;
+        route.planning_id = data.id;
+
+        $("[data-route_id='" + route.route_id + "']").html(SMT['routes/edit'](route));
+
+        initSelectColor();
+        initSelectVehicle();
+      });
+    }
+    else if (typeof options === 'object' && options.partial == 'stops') {
       $.each(data.routes, function(i, route) {
         route.i18n = mustache_i18n;
         route.planning_id = data.id;
@@ -745,7 +764,7 @@ var plannings_edit = function(params) {
   }
 
   var updatePlanning = function(data) {
-    displayPlanning(data, {partial: true});
+    displayPlanning(data, {partial: 'stops'});
   }
 
   $(".main").on("click", ".automatic_insert", function(event, ui) {
