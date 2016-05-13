@@ -145,6 +145,7 @@ class ImporterDestinations < ImporterBase
   end
 
   def import_row(name, row, line, options)
+    puts 'line ' + line.inspect
     if !row[:stop_type].nil? && row[:stop_type] != I18n.t('destinations.import_file.stop_type_visit')
       return
     end
@@ -269,11 +270,19 @@ class ImporterDestinations < ImporterBase
       }
     end
 
+    puts '--> after_import'
+    puts '@customer.destinations.size: ' + @customer.destinations.size.to_s
+    puts '@customer.plannings.size: ' + @customer.plannings.size.to_s
+
     if @routes.keys.compact.size > 0
       @planning = @customer.plannings.build({name: name || I18n.t('activerecord.models.planning') + ' ' + I18n.l(Time.now, format: :long), vehicle_usage_set: @customer.vehicle_usage_sets[0], tags: @common_tags || []}.merge(@planning_hash))
       @planning.set_routes(@routes, false, true)
       @planning.save!
     end
+
+    puts '--- after create planning'
+    puts '@customer.destinations.size: ' + @customer.destinations.size.to_s
+    puts '@customer.plannings.size: ' + @customer.plannings.size.to_s
 
     @customer.save!
   end
@@ -286,5 +295,9 @@ class ImporterDestinations < ImporterBase
     end
 
     @customer.save!
+
+    puts '--- end finalize_import'
+    puts '@customer.destinations.size: ' + @customer.destinations.size.to_s
+    puts '@customer.plannings.size: ' + @customer.plannings.size.to_s
   end
 end
