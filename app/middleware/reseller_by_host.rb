@@ -17,11 +17,13 @@
 #
 class ResellerByHost
   def initialize(app)
+    puts '----> middleware / reseller_by_host::initialize'
     @app = app
     @cache = {}
   end
 
   def call(env)
+    puts '----> middleware / reseller_by_host::call'
     env['reseller'] = reseller(env['HTTP_HOST'])
     @app.call(env)
   end

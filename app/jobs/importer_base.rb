@@ -29,6 +29,7 @@ class ImporterBase
   end
 
   def import(data, name, synchronous, options)
+    puts '----> importer_base::import'
     @synchronous = synchronous
     dests = false
 

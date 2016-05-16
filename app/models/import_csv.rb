@@ -45,6 +45,7 @@ class ImportCsv
   end
 
   def import(synchronous = false)
+    puts '----> import_csv::import, sync: ' + synchronous.inspect
     if data
       begin
         Customer.transaction do
