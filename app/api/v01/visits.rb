@@ -23,7 +23,7 @@ class V01::Visits < Grape::API
     def visit_params
       p = ActionController::Parameters.new(params)
       p = p[:visit] if p.key?(:visit)
-      p = p.permit(:ref, :quantity, :take_over, :open, :close, :open1, :close1, :open2, :close2, tag_ids: [])
+      p = p.permit(:ref, :quantity, :quantity_alt, :take_over, :open, :close, :open1, :close1, :open2, :close2, tag_ids: [])
 
       # Deals with deprecated open and close
       p[:open1] = p.delete(:open) if !p[:open1]

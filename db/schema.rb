@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160708085953) do
+ActiveRecord::Schema.define(version: 20160712133500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -437,6 +437,8 @@ ActiveRecord::Schema.define(version: 20160708085953) do
     t.string   "orange_id"
     t.string   "fuel_type"
     t.integer  "router_dimension"
+    t.integer  "capacity_alt"
+    t.string   "capacity_unit_alt"
   end
 
   add_index "vehicles", ["customer_id"], name: "fk__vehicles_customer_id", using: :btree
@@ -453,6 +455,7 @@ ActiveRecord::Schema.define(version: 20160708085953) do
     t.datetime "updated_at"
     t.time     "open2"
     t.time     "close2"
+    t.float    "quantity_alt"
   end
 
   add_index "visits", ["destination_id"], name: "index_visits_on_destination_id", using: :btree

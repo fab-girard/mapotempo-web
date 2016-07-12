@@ -88,7 +88,7 @@ class Route < ActiveRecord::Base
       if vehicle_usage.default_store_start && vehicle_usage.default_store_start.position?
         last_lat, last_lng = vehicle_usage.default_store_start.lat, vehicle_usage.default_store_start.lng
       end
-      quantity = 0
+      quantity = quantity_alt = 0
       router = vehicle_usage.vehicle.default_router
       router_dimension = vehicle_usage.vehicle.default_router_dimension
       stops_time = {}
@@ -179,7 +179,8 @@ class Route < ActiveRecord::Base
 
             if stop.is_a?(StopVisit)
               quantity += (stop.visit.quantity || 1)
-              stop.out_of_capacity = vehicle_usage.vehicle.capacity && quantity > vehicle_usage.vehicle.capacity
+              quantity_alt += (stop.visit.quantity_alt || 1)
+              stop.out_of_capacity = (vehicle_usage.vehicle.capacity && quantity > vehicle_usage.vehicle.capacity) || (vehicle_usage.vehicle.capacity_alt && quantity_alt > vehicle_usage.vehicle.capacity_alt)
             end
 
             stop.out_of_drive_time = stop.time > vehicle_usage.default_close

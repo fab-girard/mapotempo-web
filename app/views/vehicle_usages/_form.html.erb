@@ -40,7 +40,12 @@
           <div class="col-md-6">
             <div class="input-group">
               <%= number_field 'vehicle_usage[vehicle]', :capacity, min: 1, value: @vehicle_usage.vehicle.capacity, class: 'form-control width_1_2' %>
-              <%= text_field 'vehicle_usage[vehicle]', :capacity_unit, value: @vehicle_usage.vehicle.capacity_unit, class: 'form-control width_1_2' %>
+              <%= text_field 'vehicle_usage[vehicle]', :capacity_unit, value: @vehicle_usage.vehicle.capacity_unit, class: 'form-control width_1_2', placeholder: t('vehicles.form.capacity_unit.placeholder') %>
+              <span class="input-group-addon"><%= content_tag('i', '', class: 'fa fa-archive fa-fw') %></span>
+            </div>
+            <div class="input-group">
+              <%= number_field 'vehicle_usage[vehicle]', :capacity_alt, min: 1, value: @vehicle_usage.vehicle.capacity_alt, class: 'form-control width_1_2' %>
+              <%= text_field 'vehicle_usage[vehicle]', :capacity_unit_alt, value: @vehicle_usage.vehicle.capacity_unit_alt, class: 'form-control width_1_2', placeholder: t('vehicles.form.capacity_unit.placeholder') %>
               <span class="input-group-addon"><%= content_tag('i', '', class: 'fa fa-archive fa-fw') %></span>
             </div>
             <p class="help-block"><%= t 'vehicles.form.capacity.help' %> - <%= t 'vehicles.form.capacity_unit.help' %></p>

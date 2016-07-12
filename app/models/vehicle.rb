@@ -29,6 +29,7 @@ class Vehicle < ActiveRecord::Base
   validates :emission, numericality: {only_float: true}, allow_nil: true
   validates :consumption, numericality: {only_float: true}, allow_nil: true
   validates :capacity, numericality: {only_integer: true}, allow_nil: true
+  validates :capacity_alt, numericality: {only_integer: true}, allow_nil: true
   validates :color, presence: true
   validates_format_of :color, with: /\A(\#[A-Fa-f0-9]{6})\Z/
   validates :speed_multiplicator, numericality: { greater_than_or_equal_to: 0.5, less_than_or_equal_to: 1.5 }, if: :speed_multiplicator
@@ -106,7 +107,7 @@ class Vehicle < ActiveRecord::Base
   end
 
   def update_out_of_date
-    if emission_changed? || consumption_changed? || capacity_changed? || router_id_changed? || router_dimension_changed? || speed_multiplicator_changed?
+    if emission_changed? || consumption_changed? || capacity_changed? || capacity_alt_changed? || router_id_changed? || router_dimension_changed? || speed_multiplicator_changed?
       vehicle_usages.each{ |vehicle_usage|
         vehicle_usage.routes.each{ |route|
           route.out_of_date = true

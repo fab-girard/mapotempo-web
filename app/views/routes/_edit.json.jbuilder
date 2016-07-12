@@ -12,6 +12,7 @@ json.optimized_at_formatted l(route.optimized_at) if route.optimized_at
 if route.vehicle_usage
   json.contact_email route.vehicle_usage.vehicle.contact_email if route.vehicle_usage.vehicle.contact_email
   json.capacity_unit route.vehicle_usage.vehicle.capacity_unit
+  json.capacity_unit_alt route.vehicle_usage.vehicle.capacity_unit_alt
   json.vehicle_usage_id route.vehicle_usage.id
   json.vehicle_id route.vehicle_usage.vehicle.id
   json.work_time '%i:%02i' % [(route.vehicle_usage.default_close - route.vehicle_usage.default_open) / 60 / 60, (route.vehicle_usage.default_close - route.vehicle_usage.default_open) / 60 % 60]
