@@ -88,6 +88,7 @@ CREATE TABLE customers (
     external_callback_url character varying,
     external_callback_name character varying,
     enable_external_callback boolean DEFAULT false NOT NULL,
+<<<<<<< 0ad310d091f800319ca3525ba20348921e29929a
     enable_global_optimization boolean DEFAULT false NOT NULL,
     capacity_1 integer,
     capacity_2 integer,
@@ -96,6 +97,9 @@ CREATE TABLE customers (
     emission double precision,
     consumption double precision,
     description character varying
+=======
+    enable_global_optimization boolean DEFAULT false NOT NULL
+>>>>>>> Global optim call + front end + set options in admin interface
 );
 
 
@@ -2384,7 +2388,11 @@ INSERT INTO schema_migrations (version) VALUES ('20160722133109');
 
 INSERT INTO schema_migrations (version) VALUES ('20160804104220');
 
+<<<<<<< 0ad310d091f800319ca3525ba20348921e29929a
 INSERT INTO schema_migrations (version) VALUES ('20160902092547');
 
 INSERT INTO schema_migrations (version) VALUES ('20160906133935');
+=======
+INSERT INTO schema_migrations (version) VALUES ('20160818101635');
+>>>>>>> Global optim call + front end + set options in admin interface
 
