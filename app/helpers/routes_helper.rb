@@ -28,10 +28,10 @@ module RoutesHelper
     vehicle = route.vehicle_usage.try(:vehicle)
     quantities = []
     if route.quantity1_1
-      quantities << route.localized_quantity1_1 + (vehicle ? (vehicle.capacity1_1 ? '/' + vehicle.localized_capacity1_1 : '') + (vehicle.capacity1_1_unit ? "\u202F" + vehicle.capacity1_1_unit : '') : '')
+      quantities << route.localized_quantity1_1 + (vehicle ? (vehicle.default_capacity ? '/' + vehicle.default_capacity : '') + (vehicle.default_unit_1 ? "\u202F" + vehicle.default_unit_1 : '') : '')
     end
     if route.quantity1_2 > 0
-      quantities << route.localized_quantity1_2 + (vehicle ? (vehicle.capacity1_2 ? '/' + vehicle.localized_capacity1_2 : '') + (vehicle.capacity1_2_unit ? "\u202F" + vehicle.capacity1_2_unit : '') : '')
+      quantities << route.localized_quantity1_2 + (vehicle ? (vehicle.default_capacity_2 ? '/' + vehicle.default_capacity_2 : '') + (vehicle.default_unit_2 ? "\u202F" + vehicle.default_unit_2 : '') : '')
     end
     [quantities.size > 0 ? quantities.join(' - ') : nil]
   end

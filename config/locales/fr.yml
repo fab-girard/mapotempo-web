@@ -178,6 +178,10 @@ fr:
         speed_multiplicator: "Ajustement de la vitesse"
         default_country: "Pays par défaut"
         ref: "Référence"
+        default_capacity: "Capacité par defaut"
+        default_emission_consumption: "Emission / Consommation par défaut"
+        capacity_placeholder: "Exemple: m²"
+        consumption_placeholder: "Exemple: 8"
       destination:
         ref: "Référence"
         ref_small: "Réf."

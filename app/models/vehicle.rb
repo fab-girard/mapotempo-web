@@ -60,12 +60,36 @@ class Vehicle < ActiveRecord::Base
     exclude_association :zones
 
     customize(lambda { |_original, copy|
-      def copy.assign_defaults; end
-      def copy.increment_max_vehicles; end
-      def copy.create_vehicle_usage; end
-      def copy.update_out_of_date; end
-      def copy.destroy_vehicle; end
-    })
+     def copy.assign_defaults; end
+     def copy.increment_max_vehicles; end
+     def copy.create_vehicle_usage; end
+     def copy.update_out_of_date; end
+     def copy.destroy_vehicle; end
+     })
+  end
+
+  def default_emission
+    emission || customer.emission
+  end
+
+  def default_consumption
+    consumption || customer.consumption
+  end
+
+  def default_capacity
+    capacity1_1 || customer.capacity_1
+  end
+
+  def default_capacity_2
+    capacity1_2 || customer.capacity_2
+  end
+
+  def default_unit_1
+    capacity1_1_unit || customer.unit_1
+  end
+
+  def default_unit_2
+    capacity1_2_unit || customer.unit_2
   end
 
   def default_router

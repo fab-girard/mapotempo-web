@@ -1,4 +1,4 @@
-# Copyright © Mapotempo, 2016
+ # Copyright © Mapotempo, 2016
 #
 # This file is part of Mapotempo.
 #
@@ -21,6 +21,24 @@ module VehicleUsagesHelper
       concat '%s&nbsp;%s'.html_safe % [vehicle_usage.vehicle.localized_emission, t('all.unit.kgco2e_l_html')] if vehicle_usage.vehicle.emission
       concat ' - ' if vehicle_usage.vehicle.emission && vehicle_usage.vehicle.consumption
       concat '%s&nbsp;%s'.html_safe % [vehicle_usage.vehicle.localized_consumption, t('all.unit.l_100km')] if vehicle_usage.vehicle.consumption
+      if ( (vehicle_usage.vehicle.customer.emission && vehicle_usage.vehicle.customer.consumption) && (!vehicle_usage.vehicle.emission && !vehicle_usage.vehicle.consumption) )
+        concat '<span class="default-color">%s&nbsp;%s'.html_safe % [vehicle_usage.vehicle.customer.emission, t('all.unit.kgco2e_l_html')]
+        concat ' - '
+        concat '%s&nbsp;%s</span>'.html_safe % [vehicle_usage.vehicle.customer.consumption, t('all.unit.l_100km')]
+      end
+    end
+  end
+
+  def vehicle_usage_capacity_values(vehicle_usage)
+    capture do
+      if vehicle_usage.vehicle.capacity1_1 && vehicle_usage.vehicle.capacity1_1_unit
+        concat '%s&nbsp%s'.html_safe % [vehicle_usage.vehicle.capacity1_1, vehicle_usage.vehicle.capacity1_1_unit]
+        concat ' - %s&nbsp%s'.html_safe % [vehicle_usage.vehicle.capacity1_2, vehicle_usage.vehicle.capacity1_2_unit] if vehicle_usage.vehicle.capacity1_2 && vehicle_usage.vehicle.capacity1_2_unit
+      elsif vehicle_usage.vehicle.customer.capacity_1 && vehicle_usage.vehicle.customer.unit_1
+        concat '<span class="default-color">%s&nbsp%s'.html_safe % [vehicle_usage.vehicle.customer.capacity_1, vehicle_usage.vehicle.customer.unit_1]
+        concat ' - %s&nbsp%s'.html_safe % [vehicle_usage.vehicle.customer.capacity_2, vehicle_usage.vehicle.customer.unit_2] if vehicle_usage.vehicle.customer.capacity_2 && vehicle_usage.vehicle.customer.unit_2
+        concat '</span>'.html_safe
+      end
     end
   end
 

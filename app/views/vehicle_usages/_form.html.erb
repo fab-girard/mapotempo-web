@@ -25,9 +25,9 @@
           <label class="col-md-2 control-label"><%= t 'activerecord.attributes.vehicle.emission' %> / <%= t 'activerecord.attributes.vehicle.consumption' %></label>
           <div class="col-md-6">
             <div class="input-group">
-              <%= select 'vehicle_usage[vehicle]', :emission, Vehicle.emissions_table, { include_blank: t('web.form.empty_entry'), selected: @vehicle_usage.vehicle.emission }, class: 'form-control' %>
+              <%= select 'vehicle_usage[vehicle]', :emission, Vehicle.emissions_table, { include_blank: t('web.form.empty_entry'), selected: @vehicle_usage.vehicle.default_emission }, class: 'form-control' %>
               <span class="input-group-addon"><%= t 'all.unit.kgco2e_l_html' %></span>
-              <%= text_field 'vehicle_usage[vehicle]', :consumption, value: @vehicle_usage.vehicle.localized_consumption, class: 'form-control' %>
+              <%= text_field 'vehicle_usage[vehicle]', :consumption, value: @vehicle_usage.vehicle.localized_consumption, class: 'form-control', placeholder: @vehicle_usage.vehicle.default_consumption.to_s %>
               <span class="input-group-addon"><%= t 'all.unit.l_100km' %></span>
             </div>
             <p class="help-block"><%= t 'vehicles.form.emissions.help' %> - <%= t 'vehicles.form.consumption.help' %></p>
@@ -41,13 +41,13 @@
           <label class="col-md-2 control-label"><%= t 'vehicles.form.capacities.label' %></label>
           <div class="col-md-6">
             <div class="input-group">
-              <%= number_field 'vehicle_usage[vehicle]', :capacity1_1, min: 1, value: @vehicle_usage.vehicle.capacity1_1, class: 'form-control width_1_2' %>
-              <%= text_field 'vehicle_usage[vehicle]', :capacity1_1_unit, value: @vehicle_usage.vehicle.capacity1_1_unit, class: 'form-control width_1_2', placeholder: t('vehicles.form.capacity_unit.placeholder') %>
+              <%= number_field 'vehicle_usage[vehicle]', :capacity1_1, min: 1, value: @vehicle_usage.vehicle.capacity1_1, class: 'form-control width_1_2', placeholder: @vehicle_usage.vehicle.default_capacity.to_s %>
+              <%= text_field 'vehicle_usage[vehicle]', :capacity1_1_unit, value: @vehicle_usage.vehicle.capacity1_1_unit, class: 'form-control width_1_2', placeholder: @vehicle_usage.vehicle.default_unit_1.to_s %>
               <span class="input-group-addon"><%= content_tag('i', '', class: 'fa fa-archive fa-fw') %></span>
             </div>
-            <div class="input-group"<% if !@vehicle_usage.vehicle.capacity1_2 && !@vehicle_usage.vehicle.capacity1_2_unit %> style="display: none;"<% end %>>
-              <%= number_field 'vehicle_usage[vehicle]', :capacity1_2, min: 1, value: @vehicle_usage.vehicle.capacity1_2, class: 'form-control width_1_2' %>
-              <%= text_field 'vehicle_usage[vehicle]', :capacity1_2_unit, value: @vehicle_usage.vehicle.capacity1_2_unit, class: 'form-control width_1_2', placeholder: t('vehicles.form.capacity_unit.placeholder') %>
+            <div class="input-group"<% if ((!@vehicle_usage.vehicle.capacity1_2 && !@vehicle_usage.vehicle.capacity1_2_unit) && (!@vehicle_usage.vehicle.customer.capacity_2 && !@vehicle_usage.vehicle.customer.unit_2)) %> style="display: none;"<% end %>>
+              <%= number_field 'vehicle_usage[vehicle]', :capacity1_2, min: 1, value: @vehicle_usage.vehicle.capacity1_2, class: 'form-control width_1_2', placeholder: @vehicle_usage.vehicle.default_capacity_2.to_s %>
+              <%= text_field 'vehicle_usage[vehicle]', :capacity1_2_unit, value: @vehicle_usage.vehicle.capacity1_2_unit, class: 'form-control width_1_2', placeholder: @vehicle_usage.vehicle.default_unit_2.to_s %>
               <span class="input-group-addon"><%= content_tag('i', '', class: 'fa fa-archive fa-fw') %></span>
             </div>
             <p class="help-block"><%= t 'vehicles.form.capacities.help' %> - <%= t 'vehicles.form.capacity_unit.help' %><% if !@vehicle_usage.vehicle.capacity1_2 && !@vehicle_usage.vehicle.capacity1_2_unit %> - <a href="#" id="capacity-unit-add"><%= t 'vehicles.form.capacity_unit.add' %></a><% end %></p>

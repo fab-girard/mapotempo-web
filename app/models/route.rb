@@ -180,7 +180,7 @@ class Route < ActiveRecord::Base
             if stop.is_a?(StopVisit)
               quantity1_1 += (stop.visit.quantity1_1 || 1)
               quantity1_2 += (stop.visit.quantity1_2 || 1)
-              stop.out_of_capacity = (vehicle_usage.vehicle.capacity1_1 && quantity1_1 > vehicle_usage.vehicle.capacity1_1) || (vehicle_usage.vehicle.capacity1_2 && quantity1_2 > vehicle_usage.vehicle.capacity1_2)
+              stop.out_of_capacity = (vehicle_usage.vehicle.default_capacity && quantity1_1 > vehicle_usage.vehicle.default_capacity) || (vehicle_usage.vehicle.default_capacity_2 && quantity1_2 > vehicle_usage.vehicle.default_capacity_2)
             end
 
             stop.out_of_drive_time = stop.time > vehicle_usage.default_close
@@ -208,8 +208,7 @@ class Route < ActiveRecord::Base
       self.stop_trace = trace
       self.stop_out_of_drive_time = self.end > vehicle_usage.default_close
 
-      self.emission = vehicle_usage.vehicle.emission.nil? || vehicle_usage.vehicle.consumption.nil? ? nil : self.distance / 1000 * vehicle_usage.vehicle.emission * vehicle_usage.vehicle.consumption / 100
-
+      self.emission = vehicle_usage.vehicle.default_emission.nil? || vehicle_usage.vehicle.default_consumption.nil? ? nil : self.distance / 1000 * vehicle_usage.vehicle.default_emission * vehicle_usage.vehicle.default_consumption / 100
       [stops_sort, stops_drive_time, stops_time_windows]
     end
   end

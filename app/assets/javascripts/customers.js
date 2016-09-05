@@ -80,6 +80,14 @@ var customers_edit = function(params) {
     return true;
   });
 
+  /*Default multiples values handler*/
+  $('#capacity-unit-add').on('click', function(){
+    $(this).hide();
+    $('#customer_vehicle_capacity_input .input-group').show();
+    e.preventDefault();
+    return false;
+  });
+
   /* API: Devices */
   devices_observe_customer($.extend(params, {
     default_password: Math.random().toString(36).slice(-8)

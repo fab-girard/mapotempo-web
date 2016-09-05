@@ -19,8 +19,8 @@ if !@planning.customer.enable_orders
 end
 if route.vehicle_usage
   json.contact_email route.vehicle_usage.vehicle.contact_email if route.vehicle_usage.vehicle.contact_email
-  json.capacity1_1_unit route.vehicle_usage.vehicle.capacity1_1_unit
-  json.capacity1_2_unit route.vehicle_usage.vehicle.capacity1_2_unit if route.quantity1_2 > 0
+  json.capacity1_1_unit route.vehicle_usage.vehicle.default_unit_1
+  json.capacity1_2_unit route.vehicle_usage.vehicle.default_unit_2 if route.quantity1_2 > 0
   json.vehicle_usage_id route.vehicle_usage.id
   json.vehicle_id route.vehicle_usage.vehicle.id
   json.work_time '%i:%02i' % [(route.vehicle_usage.default_close - route.vehicle_usage.default_open) / 60 / 60, (route.vehicle_usage.default_close - route.vehicle_usage.default_open) / 60 % 60]

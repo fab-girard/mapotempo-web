@@ -20,11 +20,10 @@
           <%= vehicle_usage_router vehicle_usage %>
         </td>
         <td>
-          <%= vehicle_usage_emission_consumption vehicle_usage %>
+          <%= vehicle_usage_emission_consumption(vehicle_usage).to_s %>
         </td>
         <td>
-          <%= vehicle_usage.vehicle.capacity1_1 %>&nbsp;<%= vehicle_usage.vehicle.capacity1_1_unit %>
-          <%= vehicle_usage.vehicle.capacity1_2 %>&nbsp;<%= vehicle_usage.vehicle.capacity1_2_unit %>
+          <%= vehicle_usage_capacity_values(vehicle_usage).to_s %>
         </td>
         <td>
           <%= vehicle_usage_store_name vehicle_usage %>
