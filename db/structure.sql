@@ -94,7 +94,8 @@ CREATE TABLE customers (
     unit_1 character varying,
     unit_2 character varying,
     emission double precision,
-    consumption double precision
+    consumption double precision,
+    description character varying
 );
 
 
@@ -2384,4 +2385,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160722133109');
 INSERT INTO schema_migrations (version) VALUES ('20160804104220');
 
 INSERT INTO schema_migrations (version) VALUES ('20160902092547');
+
+INSERT INTO schema_migrations (version) VALUES ('20160906133935');
 

@@ -182,6 +182,9 @@ en:
         default_emission_consumption: "Default emission / consumption"
         capacity_placeholder: "Example: m²"
         consumption_placeholder: "Ecample: 8"
+        description_title: "Description"
+        description_label: "Specific user informations"
+        description_placeholder: "User details"
       destination:
         ref: "Reference"
         ref_small: "Ref."

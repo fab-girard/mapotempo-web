@@ -182,6 +182,9 @@ fr:
         default_emission_consumption: "Emission / Consommation par défaut"
         capacity_placeholder: "Exemple: m²"
         consumption_placeholder: "Exemple: 8"
+        description_title: "Déscription"
+        description_label: "Informations utilisateur"
+        description_placeholder: "Détails sur l'utilisateur courant"
       destination:
         ref: "Référence"
         ref_small: "Réf."
