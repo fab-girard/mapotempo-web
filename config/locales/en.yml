@@ -178,6 +178,7 @@ en:
         speed_multiplicator: "Speed multiplier"
         default_country: "Default country"
         ref: "Reference"
+        ref_placeholder: "Reference must be uniq"
         default_capacity: "Default capacity"
         default_emission_consumption: "Default emission / consumption"
         capacity_placeholder: "Example: m²"
