@@ -80,6 +80,7 @@
 //= require pnotify/pnotify.desktop.js
 //= require pnotify.init.js
 //= require_tree .
+//= require components
 // jQuery Turbolinks documentation informs to load all scripts before turbolinks
 //= require turbolinks
 
@@ -110,3 +111,10 @@ $(document).ready(function () {
 $(document).on('page:restore', function () {
   Paloma.start();
 });
+
+// $(document).on('turbolinks:load', function() {
+//   Paloma.start();
+// });
+
+// var leafletControlGeocoder = require('leaflet-control-geocoder');
+// console.log(leafletControlGeocoder);

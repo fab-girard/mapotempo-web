@@ -102,6 +102,9 @@ module Mapotempo
     # Add additional assets to the asset load path
     config.assets.paths << Rails.root.join('node_modules')
 
+    # Add CommonJS lib here
+    # config.browserify_rails.paths << /vendor\/assets\/javascripts\/module\.js/
+    # config.browserify_rails.paths << /vendor\/assets\/javascripts\/leaflet-control-geocoder\/*/
   end
 end
 
