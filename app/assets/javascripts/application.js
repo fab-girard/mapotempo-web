@@ -61,7 +61,6 @@
 //= require leaflet.draw
 //= require leaflet_numbered_markers
 //= require Leaflet.ControlledBounds
-//= require leaflet-pip
 //= require leaflet-sidebar
 //= require leaflet-hash
 //= require leaflet.pattern

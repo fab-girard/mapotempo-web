@@ -186,6 +186,10 @@ GEM
       railties (>= 3.0)
     brakeman (3.6.0)
     browser (2.3.0)
+    browserify-rails (4.2.0)
+      addressable (>= 2.4.0)
+      railties (>= 4.0.0, < 5.2)
+      sprockets (>= 3.6.0)
     builder (3.2.3)
     bullet (5.5.0)
       activesupport (>= 3.0.0)
@@ -622,6 +626,7 @@ DEPENDENCIES
   bootstrap-wysihtml5-rails
   brakeman
   browser
+  browserify-rails
   bullet
   byebug
   cancancan
