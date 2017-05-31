@@ -18,6 +18,7 @@
 'use strict';
 
 var leafletPip = require('leaflet-pip');
+var leafletDraw = require('leaflet-draw');
 
 var zonings_edit = function(params) {
   'use strict';

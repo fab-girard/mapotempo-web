@@ -3,7 +3,8 @@
   "dependencies" : {
     "browserify": "~10.2.4",
     "browserify-incremental": "^3.0.1",
-    "leaflet-pip": "~1.1.0"
+    "leaflet-pip": "~1.1.0",
+    "leaflet-draw": "~0.4.9"
   },
   "license": "MIT",
   "engines": {

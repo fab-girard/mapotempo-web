@@ -98,6 +98,10 @@ module Mapotempo
       locster: Locster.new,
       suivi_de_flotte: SuiviDeFlotte.new
     )
+
+    # Add additional assets to the asset load path
+    config.assets.paths << Rails.root.join('node_modules')
+
   end
 end
 

@@ -76,12 +76,6 @@ GIT
       railties (>= 3.1.0)
 
 GIT
-  remote: git://github.com/frodrigo/leaflet-draw-rails.git
-  revision: edef878c8ada3daf04e93fe0af0914708f3bc789
-  specs:
-    leaflet-draw-rails (0.4.9.0)
-
-GIT
   remote: git://github.com/frodrigo/leaflet-hash-rails.git
   revision: 4e9cc190e5a6811f5dab872a4d0a2506713ffcfe
   specs:
@@ -669,7 +663,6 @@ DEPENDENCIES
   jquery-ui-rails (< 6.0.0)
   leaflet-control-geocoder-rails!
   leaflet-controlledbounds-rails!
-  leaflet-draw-rails!
   leaflet-encoded-rails!
   leaflet-hash-rails!
   leaflet-markercluster-rails!

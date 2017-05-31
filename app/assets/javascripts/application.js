@@ -58,7 +58,6 @@
 //= require i18n/translations
 //= require leaflet
 //= require leaflet.markercluster
-//= require leaflet.draw
 //= require leaflet_numbered_markers
 //= require Leaflet.ControlledBounds
 //= require leaflet-sidebar

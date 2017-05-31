@@ -42,7 +42,6 @@
  *= require bootstrap-wysihtml5
  *= require bootstrap-datepicker3
  *= require leaflet
- *= require leaflet.draw
  *= require Control.Geocoder
  *= require twitter-bootstrap-static/bootstrap
  * font awesome must be after bootstrap to overwrite glyphicons
@@ -56,3 +55,5 @@
  *= require pnotify
  *= require_tree .
  */
+
+@import "leaflet-draw/dist/leaflet.draw.css";
